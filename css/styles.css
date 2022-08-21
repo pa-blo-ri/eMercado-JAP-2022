@@ -188,3 +188,28 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.login-image{
+  width: 66%;
+}
+
+.margin-bottom-20{
+  margin-bottom: 20px;
+}
+
+.margin-bottom-10{
+  margin-bottom: 10px;
+}
+
+.radius{
+  border-radius: 30px;
+}
+
+#btn-li{
+  width: 60%!important;
+}
+
+#forg-pass{
+  font-size: 0.9rem!important;
+}
+
