@@ -1,10 +1,13 @@
-//array donde se guardan los datos recibidos
+//->Cargar la lista de los productos correspondientes a la categoría en la que hicimos click
+
+//variables donde se guardan los datos recibidos
 let categoriesArray = [];
 let categoryData = "";
 
+
 function showProductsList(categoriesArray, categoryData) {
     let htmlContentToAppend = "";
-    let leadContentToAppend = "";
+    let categoryName = "";
 
     for (let i = 0; i < categoriesArray.length; i++) {
         let product = categoriesArray[i];
@@ -33,8 +36,8 @@ function showProductsList(categoriesArray, categoryData) {
 
     }
 
-    leadContentToAppend = `<strong> ${categoryData.toLowerCase()}.</strong>`;
-    document.getElementById("subt-cat").innerHTML += leadContentToAppend;
+    categoryName = `<strong> ${categoryData.toLowerCase()}.</strong>`;
+    document.getElementById("subt-cat").innerHTML += categoryName;
 
 }
 
@@ -43,9 +46,11 @@ function showProductsList(categoriesArray, categoryData) {
 /* 
 EJECUCIÓN:
 
--Al cargar la página se llama a getJSONData() pasándole por parámetro la dirección para obtener el listado.
--Se verifica el estado del objeto que devuelve, y, si es correcto, se cargan los datos en categoriesArray.
--Por último, se llama a showCategoriesList() pasándole por parámetro categoriesArray.
+-Al cargar la página se llama a getJSONData() pasándole como parámetros la constante donde se encuentran todos los JSON de los productos, 
+junto con lo que tenemos almacenado en el localStorage  (el ID de la categoría en la que hicimos click) haciendo uso del
+archivo index.js y poniendole tambien la extension JSON definida en una constante.
+-Se fija si el objeto que devuelve esta en estado ok, y si es asi se pasan los datos a caterogiesArray y categoryData
+-Por último, se llama a showProductsList() pasándole por parámetro categoriesArray y categoryData.
 
 */
 
