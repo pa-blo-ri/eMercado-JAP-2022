@@ -6,16 +6,16 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
-function sortCategories(criteria, array){
+function sortProducts(criteria, array){
     let result = [];
-    if (criteria === ORDER_ASC_BY_NAME)
+    if (criteria === ORDER_ASC_BY_PRICE)
     {
         result = array.sort(function(a, b) {
             if ( a.name < b.name ){ return -1; }
             if ( a.name > b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){
+    }else if (criteria === ORDER_DESC_BY_PRICE){
         result = array.sort(function(a, b) {
             if ( a.name > b.name ){ return -1; }
             if ( a.name < b.name ){ return 1; }
@@ -71,14 +71,14 @@ function showCategoriesList(){
     }
 }
 
-function sortAndShowCategories(sortCriteria, categoriesArray){
+function sortAndShowProducts(sortCriteria, categoriesArray){
     currentSortCriteria = sortCriteria;
 
     if(categoriesArray != undefined){
         currentCategoriesArray = categoriesArray;
     }
 
-    currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
+    currentCategoriesArray = sortProducts(currentSortCriteria, currentCategoriesArray);
 
     //Muestro las categorías ordenadas
     showCategoriesList();
@@ -88,6 +88,10 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+    
+    //Agregamos el nombre de usuario (guardado en la localStorage) a la barra superior
+    document.getElementById("userNameToBar").innerHTML = localStorage.getItem("userName") ;
+
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
@@ -97,15 +101,15 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
+        sortAndShowProducts(ORDER_ASC_BY_PRICE);
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_NAME);
+        sortAndShowProducts(ORDER_DESC_BY_PRICE);
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        sortAndShowProducts(ORDER_BY_PROD_COUNT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){

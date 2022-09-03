@@ -213,3 +213,16 @@ a.custom-card:hover {
   font-size: 0.9rem!important;
 }
 
+.userNameStyle{
+  font-family: 'Raleway', serif;
+}
+
+.text-before-button{
+  margin-right: 10px!important;
+}
+.filter-asc-des-by-price{
+  margin-bottom: 0px!important;
+}
+
+
+

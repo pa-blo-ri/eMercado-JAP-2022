@@ -20,8 +20,11 @@ document.getElementById("btn-li").addEventListener("click", function () {
         alert("Ninguno de los campos puede estar vacío.");
 
 
-    } else window.location.href = "portada.html";
+    } else {
+        localStorage.setItem("userName", document.getElementById("floatingInput").value);
+        window.location.href = "portada.html";
 
+    }
 });
 
 function isEmpty(tagId) {
@@ -33,5 +36,5 @@ function isEmpty(tagId) {
 
 function isEmptyStyle(tagId) {
     document.getElementById(tagId).style.borderColor = "red";
-    
+
 }

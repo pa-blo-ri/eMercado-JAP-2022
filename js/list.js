@@ -1,16 +1,28 @@
+const ORDER_ASC_BY_PRICE = "Asc";
+const ORDER_DESC_BY_PRICE = "Desc";
+const ORDER_BY_PROD_COUNT = "Cant.";
+let currentCategoriesArray = [];
+let currentSortCriteria = undefined;
+let minCount = undefined;
+let maxCount = undefined;
+
+
 //->Cargar la lista de los productos correspondientes a la categoría en la que hicimos click
 
 //variables donde se guardan los datos recibidos
-let categoriesArray = [];
-let categoryData = "";
 
-
-function showProductsList(categoriesArray, categoryData) {
+function showProductsList() {
+    
     let htmlContentToAppend = "";
     let categoryName = "";
 
-    for (let i = 0; i < categoriesArray.length; i++) {
-        let product = categoriesArray[i];
+    for (let i = 0; i < currentCategoriesArray.length; i++) {
+        let product = currentCategoriesArray[i];
+
+        //Se definen condiciones para el filtro de rangos por precio
+
+        if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
+        ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
@@ -31,13 +43,14 @@ function showProductsList(categoriesArray, categoryData) {
             </div>
         </div>
         `
+        }
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 
     }
 
-    categoryName = `<strong> ${categoryData.toLowerCase()}.</strong>`;
-    document.getElementById("subt-cat").innerHTML += categoryName;
+    categoryName = `<strong> ${categoryData.toLowerCase()}</strong>`;
+    document.getElementById("subt-cat").innerHTML =`Verás aquí todos los productos de la categoría ${categoryName}.`;
 
 }
 
@@ -55,12 +68,116 @@ archivo index.js y poniendole tambien la extension JSON definida en una constant
 */
 
 document.addEventListener("DOMContentLoaded", function (e) {
+    //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
     getJSONData(PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE).then(function (resultObj) {
+        
+        //Agregamos el nombre de usuario (guardado en la localStorage) a la barra superior
+        document.getElementById("userNameToBar").innerHTML = localStorage.getItem("userName");
+
         if (resultObj.status === "ok") {
-            categoriesArray = resultObj.data.products;
+            
+            currentCategoriesArray = resultObj.data.products;
             categoryData = resultObj.data.catName;
 
-            showProductsList(categoriesArray, categoryData);
+            showProductsList();
+            
         }
     });
+
+    //Traemos los botones (Precio_Asc, Precio_Desc y Relevancia) mediante su id:
+
+    document.getElementById("sortAsc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_ASC_BY_PRICE);
+    });
+
+    document.getElementById("sortDesc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_DESC_BY_PRICE);
+    });
+
+    document.getElementById("sortByCount").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_BY_PROD_COUNT);
+    });
+
+    //Boton de limpiar el filtro de rango de precio
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterCountMin").value = "";
+        document.getElementById("rangeFilterCountMax").value = "";
+
+        minCount = undefined;
+        maxCount = undefined;
+
+        showProductsList();
+    });
+
+    //Boton de filtrar usando lo ingresado en los input
+
+    document.getElementById("rangeFilterCount").addEventListener("click", function(){
+        
+        //Obtengo el mínimo y máximo ingresado en los input del filtro por rangos y manejamos las posibilidades de que uno de los campos no haya sido ingresado.
+
+        minCount = document.getElementById("rangeFilterCountMin").value;
+        maxCount = document.getElementById("rangeFilterCountMax").value;
+
+        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
+            minCount = parseInt(minCount);
+        }
+        else{
+            minCount = undefined;
+        }
+
+        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
+            maxCount = parseInt(maxCount);
+        }
+        else{
+            maxCount = undefined;
+        }
+
+        showProductsList();
+    });
+
 });
+
+//Funcion que se encarga de comparar segun el criterio que le pasamos por parametro los elementos del array que le pasamos como segundo parametro
+function sortProducts(criteria, array){
+    let result = [];
+    if (criteria === ORDER_ASC_BY_PRICE)
+    {
+        result = array.sort(function(a, b) {
+            if ( a.cost < b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_DESC_BY_PRICE){
+        result = array.sort(function(a, b) {
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_BY_PROD_COUNT){
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
+
+            if ( aCount > bCount ){ return -1; }
+            if ( aCount < bCount ){ return 1; }
+            return 0;
+        });
+    }
+
+    return result;
+}
+
+
+function sortAndShowProducts(sortCriteria, categoriesArray){
+    currentSortCriteria = sortCriteria;
+
+    if(categoriesArray != undefined){
+        currentCategoriesArray = categoriesArray;
+    }
+
+    currentCategoriesArray = sortProducts(currentSortCriteria, currentCategoriesArray);
+
+    showProductsList();
+}
+
