@@ -224,5 +224,140 @@ a.custom-card:hover {
   margin-bottom: 0px!important;
 }
 
-
+.product-container{
+  margin-top: 10%;
+  background: white;
+}
+* {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+.gallery {
+  display: flex;
+  margin: 10px auto;
+  margin-right: 30px;
+  max-width: 600px;
+  position: relative;
+  padding-top: 66.6666666667%;
+}
+@media screen and (min-width: 600px) {
+  .gallery {
+    padding-top: 400px;
+ }
+}
+.gallery__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.gallery__thumb {
+  padding-top: 6px;
+  margin: 6px;
+  display: block;
+}
+.gallery__selector {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+.gallery__selector:checked + .gallery__img {
+  opacity: 1;
+}
+.gallery__selector:checked ~ .gallery__thumb > img {
+  box-shadow: 0 0 0 3px #0be2f6;
+}
+.product-title{
+  margin-top: 2px auto;
+}
+.product-description{
+  margin-top: 30px ;
+}
+.buttons-place{
+  margin-top: 155px;
+}
+.comments-body{
+  margin-left: 35px;
+}
+.comments-username{
+  margin-left: 5px;
+}
+.comments-date{
+  margin-left: 5px;
+}
+.margin-bottom-text{
+  margin-bottom: 15px;
+}
+.rate{
+  margin-right: 23px;
+}
+.comment-box {
+padding: 5px;
+margin-right: 30px;
+}
+.comment-area textarea {
+resize: none;
+border: 1px solid #ad9f9f
+}
+.form-control{
+  font-size: 14px;
+}
+.form-control:focus {
+color: #495057;
+background-color: #fff;
+border-color: #ffffff;
+outline: 0;
+box-shadow: 0 0 0 1px rgb(22, 87, 226) !important
+}
+.send {
+color: #fff;
+background-color: rgb(22, 87, 226);
+border-color: rgb(22, 87, 226)
+}
+.send:hover {
+color: #fff;
+background-color: #1401c0;
+border-color: #1401c0
+}
+.rating {
+display: flex;
+margin-top: -10px;
+flex-direction: row-reverse;
+margin-left: -4px;
+float: left
+}
+.rating>input {
+display: none
+}
+.rating>label {
+position: relative;
+width: 19px;
+font-size: 25px;
+color: orange;
+cursor: pointer;
+}
+.rating>label::before {
+content: "\2605";
+position: absolute;
+opacity: 0
+}
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+opacity: 1 !important
+}
+.rating>input:checked~label:before {
+opacity: 1
+}
+.rating:hover>input:checked~label:before {
+opacity: 0.4
+}
+.opinion-title{
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+}
 
