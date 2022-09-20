@@ -6,7 +6,6 @@ let commentsToHTML = "";
 function showProductsList() {
 
     let htmlContentToAppend = "";
-    console.log(Date.now)
 
     htmlContentToAppend += `
         
@@ -32,6 +31,7 @@ function showProductsList() {
             </div>
         </div>
         <span><h4 class="opinion-title">Opiniones sobre el producto</h4></span>
+
         ${commentsToHTML}
         
         <span><h4 class="opinion-title">Escribe tu opinión</h4></span>
@@ -106,15 +106,23 @@ function showProductsList() {
 
 function catchImages() {
     let imagesLenght = Object.keys(productDataArray.images).length;
-    let imagesToAppend = "";
+    let imagesToAppend = `
 
-    for (let i = 0; i < imagesLenght; i++) {
+    <div class="gallery__item">
+      <input type="radio" id="img-1" checked name="gallery" class="gallery__selector"/>
+      <img class="gallery__img" src="${productDataArray.images[0]}" alt="product image"/>
+      <label for="img-1" class="gallery__thumb"><img src="${productDataArray.images[0]}" alt=""/></label>
+    </div>
+
+    `;
+
+    for (let i = 1; i < imagesLenght; i++) {
         let imageIndex = productDataArray.images[i];
 
         imagesToAppend += `
 
         <div class="gallery__item">
-          <input type="radio" id="img-${i + 1}" checked name="gallery" class="gallery__selector"/>
+          <input type="radio" id="img-${i + 1}" name="gallery" class="gallery__selector"/>
           <img class="gallery__img" src="${imageIndex}" alt="product image"/>
           <label for="img-${i + 1}" class="gallery__thumb"><img src="${imageIndex}" alt=""/></label>
         </div>
@@ -127,11 +135,11 @@ function catchImages() {
 };
 
 function comments() {
-    let commentsLenght = Object.keys(productComments).length;
+    const commentsLenght = Object.keys(productComments).length;
     let commentsToAppend = "";
 
     for (let i = 0; i < commentsLenght; i++) {
-        let commentsIndex = productComments[i];
+        const commentsIndex = productComments[i];
         let commentsRate = "";
 
 
@@ -200,14 +208,14 @@ function formatDate(stringDate) {
     return finalDate;
 };
 
-function actualDate(){
+function actualDate() {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
 
     today = dd + '-' + mm + '-' + yyyy;
-    
+
     return today;
 }
 
@@ -223,20 +231,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
             productComments = resultComm.data;
 
             comments();
+
+            getJSONData(PRODUCT_INFO_URL + localStorage.getItem("productID") + EXT_TYPE).then(function (resultProd) {
+
+                if (resultProd.status === "ok") {
+                    productDataArray = resultProd.data;
+
+                    catchImages();
+                    showProductsList();
+
+                }
+            })
         }
-    });
+    })
 
     //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
-    getJSONData(PRODUCT_INFO_URL + localStorage.getItem("productID") + EXT_TYPE).then(function (resultProd) {
 
-        if (resultProd.status === "ok") {
-            productDataArray = resultProd.data;
-
-            catchImages();
-            showProductsList();
-
-        }
-    });
 
 })
 
