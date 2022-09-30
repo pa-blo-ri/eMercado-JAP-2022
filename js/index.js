@@ -12,6 +12,6 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-    //Agregamos el nombre de usuario (guardado en la localStorage) a la barra superior
-    document.getElementById("userNameToBar").innerHTML = localStorage.getItem("userName") ;
+    userToBar()
+
 });

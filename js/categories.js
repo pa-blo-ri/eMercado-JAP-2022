@@ -89,8 +89,7 @@ function sortAndShowProducts(sortCriteria, categoriesArray){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     
-    //Agregamos el nombre de usuario (guardado en la localStorage) a la barra superior
-    document.getElementById("userNameToBar").innerHTML = localStorage.getItem("userName") ;
+    userToBar()
 
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){

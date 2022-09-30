@@ -2,6 +2,7 @@ let productDataArray = [];
 let productComments = [];
 let imagesToHTML = "";
 let commentsToHTML = "";
+let relatedProductsToHTML = '';
 
 function showProductsList() {
 
@@ -30,9 +31,15 @@ function showProductsList() {
                 </div>
             </div>
         </div>
+
+        <span><h4 class="opinion-title">Productos relacionados</h4></span>
+
+        <div class="card-group">
+        ${relatedProductsToHTML}
+        </div>
         <span><h4 class="opinion-title">Opiniones sobre el producto</h4></span>
 
-        ${commentsToHTML}
+        ${commentsToHTML}        
         
         <span><h4 class="opinion-title">Escribe tu opinión</h4></span>
         <div class="card p-3">
@@ -74,8 +81,8 @@ function showProductsList() {
         </div>
 
         <div class="row">
-            <div class="col-2 user d-flex flex-row align-items-center"></div>
-            <div class="col-10">
+            
+            <div>
                 <div class="comment-box ml-2">
                     <div class="row">
                         
@@ -83,12 +90,9 @@ function showProductsList() {
                     <div class="comment-area"> <textarea class="form-control" placeholder="Escriba aquí un comentario" rows="4"></textarea> </div>
                         <div class="comment-btns mt-2">
                             <div class="row">
-
-                            <div class="icons align-items-center">
-                                <div class="pull-right"> <button class="btn btn-success send btn-sm">Enviar</button> </div>                                        
-                            </div>
-                                
-                                
+                                <div class="icons align-items-center">
+                                    <div class="pull-right"> <button class="btn btn-success send btn-sm">Enviar</button> </div>                                        
+                                </div>    
                             </div>
                         </div>
                     </div>
@@ -104,7 +108,35 @@ function showProductsList() {
 
 };
 
-function catchImages() {
+const catchRelatedProducts = () => {
+
+    const relatedProducts = productDataArray.relatedProducts
+    let relatedProductsToAppend = ''
+
+
+    relatedProducts.forEach((product) => {
+        const { id, name, image } = product
+     
+
+
+        relatedProductsToAppend += `
+            <div class="card-item">
+                <div class="col md-4" onClick="idToLocalStorage(${id})">
+                    <div class="card related-products">
+                        <img class="card-img-top" src="${image}">                                       
+                        <h3 class="m-3" id="related-products-body">${name}</h3>                              
+                    </div>
+                </div>
+                   
+            </div>
+        `
+        relatedProductsToHTML = relatedProductsToAppend
+    })
+
+
+}
+
+const catchImages = () => {
     let imagesLenght = Object.keys(productDataArray.images).length;
     let imagesToAppend = `
 
@@ -134,7 +166,7 @@ function catchImages() {
 
 };
 
-function comments() {
+const comments = () => {
     const commentsLenght = Object.keys(productComments).length;
     let commentsToAppend = "";
 
@@ -192,61 +224,58 @@ function comments() {
     commentsToHTML = commentsToAppend;
 };
 
-function formatDate(stringDate) {
+const formatDate = (stringDate) => {
 
-    let cuttedDate = stringDate.slice(0, 10);
-    let [year, month, day] = cuttedDate.split('-');
-    let zero = "";
+    let cuttedDate = stringDate.slice(0, 10)
+    let [year, month, day] = cuttedDate.split('-')
+    let zero = ""
 
     if (day < 10 && day.slice(0, 1) != "0") {
-        zero = "0";
+        zero = "0"
     }
+    return (zero + day + "-" + month + "-" + year)
 
-
-    let finalDate = (zero + day + "-" + month + "-" + year);
-
-    return finalDate;
-};
-
-function actualDate() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-
-    today = dd + '-' + mm + '-' + yyyy;
-
-    return today;
 }
 
-document.addEventListener("DOMContentLoaded", function (e) {
+const actualDate = () => {
+    let today = new Date()
+    let dd = String(today.getDate()).padStart(2, '0')
+    let mm = String(today.getMonth() + 1).padStart(2, '0')
+    let yyyy = today.getFullYear()
 
-    document.getElementById("userNameToBar").innerHTML = localStorage.getItem("userName");
+    today = dd + '-' + mm + '-' + yyyy
 
-    //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
-    getJSONData(PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("productID") + EXT_TYPE).then(function (resultComm) {
+    return today
+}
+
+document.addEventListener("DOMContentLoaded", e => {
+
+      //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
+    getJSONData(PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("productID") + EXT_TYPE).then(resultComm => {
 
 
         if (resultComm.status === "ok") {
             productComments = resultComm.data;
 
-            comments();
+            userToBar()       
+            comments()
 
-            getJSONData(PRODUCT_INFO_URL + localStorage.getItem("productID") + EXT_TYPE).then(function (resultProd) {
+            getJSONData(PRODUCT_INFO_URL + localStorage.getItem("productID") + EXT_TYPE).then(resultProd => {
 
                 if (resultProd.status === "ok") {
                     productDataArray = resultProd.data;
 
-                    catchImages();
-                    showProductsList();
+                    catchRelatedProducts()
+                    catchImages()
+                    showProductsList()
+
+
 
                 }
             })
         }
-    })
-
-    //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
-
-
+    })    
 })
+
+
 
