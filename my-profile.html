@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
+  <!-- <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -23,7 +23,7 @@
         font-size: 3.5rem;
       }
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
@@ -44,18 +44,101 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <div class="dropdown" id="userDropdown">            
+          <div class="dropdown" id="userDropdown">
           </div>
         </ul>
       </div>
     </div>
   </nav>
-  <main>
+  <main class="pb-5 container">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+      <div class="text-center p-4">
+        <h2>Perfil de usuario</h2>
       </div>
-    </div>
+      <div class="row ms-auto me-auto d-flex justify-content-between">
+        <div class="card shadow-sm" id="mainCard">
+          <div class="parent">
+            <div class="image1 user" id="display-image">
+            </div>            
+            <div class="image-upload">
+              <label for="file-input">
+                <svg class="image2" id="addAvatar" xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                  fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                  <path
+                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                  <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+              </label>
+              <input id="file-input" type="file" />
+            </div>
+          </div>
+          <h6 class="border-bottom pb-2 mb-0 p-3 ps-1 ">Editar perfil
+          </h6>
+          <form id="formulario" action="#" method="get" class="needs-validation" novalidate>
+            <div class="row d-flex justify-content-between mt-1">
+              <div class="col-sm-6 my-2">
+                <label for="nombre" class="form-label">Nombre*</label>
+                <input type="text" class="form-control" id="nombre" required>
+                <div class="invalid-feedback">
+                  Debes ingresar tu nombre.
+                </div>
+              </div>
+              <div class="col-sm-6 my-2">
+                <label for="segundoNombre" class="form-label">Segundo nombre</label>
+                <input type="text" class="form-control" id="segundoNombre">
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="apellido" class="form-label">Apellido*</label>
+                <input type="text" class="form-control" id="apellido" required>
+                <div class="invalid-feedback">
+                  Debes ingresar tu apellido.
+                </div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="segundoApellido" class="form-label">Segundo apellido</label>
+                <input type="text" class="form-control" id="segundoApellido">
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="correo" class="form-label">Correo electrónico*</label>
+                <input type="text" class="form-control" id="correo" required>
+                <div class="invalid-feedback">
+                  Debes ingresar un correo electrónico.
+                </div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="telefono" class="form-label">Teléfono*</label>
+                <input type="text" class="form-control" id="telefono" required>
+                <div class="invalid-feedback">
+                  Debes ingresar un número de teléfono.
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-sm btn-outline-secondary my-2 w-auto rounded" id="cancel">
+                  Cancelar
+                </button>
+                <button type="submit" class="btn btn-sm btn-outline-success ms-2 my-2 w-auto rounded" id="save">
+                  Guardar cambios
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!--Alert success-->
+        <div class="alert alert-light visually-hidden shadow-sm rounded border" role="alert" id="alertSuccess">
+          <h2 class="alert-heading text-center">Cambios guardados con éxito</h2>
+          <button type="button" class="btn btn-light float-end" id="closeAlert">Cerrar</button>
+        </div>
+
+        <!--Alert logIn-->
+        <div class="alert alert-light visually-hidden shadow-sm rounded border text-center" role="alert" id="alert">
+          <h4 class="alert-heading">Debes estar logueado para ingresar a tu perfil.</h4>
+          <button type="button" class="btn btn-light float-end border" id="logIn">Iniciar sesión</button>
+        </div>
+      </div>
   </main>
   <footer class="text-muted">
     <div class="container">

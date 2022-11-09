@@ -1,12 +1,13 @@
-let productDataArray = [];
-let productComments = [];
-let imagesToHTML = "";
-let commentsToHTML = "";
-let relatedProductsToHTML = '';
+let productDataArray = []
+let productComments = []
+let imagesToHTML = ''
+let commentsToHTML = ''
+let relatedProductsToHTML = ''
+
 
 function showProductsList() {
 
-    let htmlContentToAppend = "";
+    let htmlContentToAppend = ``
 
     htmlContentToAppend += `
         
@@ -25,8 +26,8 @@ function showProductsList() {
                         <small class="text-muted">${productDataArray.soldCount} vendidos</small> 
                     </div>
                     <div class="buttons-place">
-                    <button type="button" class="btn btn-primary button-product-info">Comprar</button>
-                    <button type="button" class="btn btn-light button-product-info">Agregar al carrito</button>
+                    <button type="button" class="btn btn-primary button-product-info" id="buy">Comprar</button>
+                    <button type="button" class="btn btn-light button-product-info" id="addToCart">Agregar al carrito</button>
                     </div>
                 </div>
             </div>
@@ -46,7 +47,7 @@ function showProductsList() {
             
             <div class="d-flex justify-content-between align-items-center">
 
-            <div class="user d-flex flex-row align-items-center">                              
+            <div class="d-flex flex-row align-items-center">                              
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -104,9 +105,69 @@ function showProductsList() {
         `
 
 
-    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend
+    listeners()
+}
 
-};
+const listeners = () => {
+
+    document.getElementById("buy").addEventListener("click", e => {
+        addToCart()
+        window.location = "cart.html"
+    })
+
+    document.getElementById("addToCart").addEventListener("click", e => addToCart())
+
+}
+
+const addToCart = () => {
+
+    let cartContainer = []
+    let productToCart = {
+        id: productDataArray.id,
+        name: productDataArray.name,
+        count: 1,
+        unitCost: productDataArray.cost,
+        currency: productDataArray.currency,
+        image: productDataArray.images[0]
+    }
+
+
+
+    if (localStorage.getItem('cartObj') === null) {
+
+        cartContainer.push(productToCart)
+
+        localStorage.setItem('cartObj', JSON.stringify(cartContainer))
+
+    } else {
+        console.log(productToCart.id)
+        countValidation(productToCart)
+    }  
+
+}
+
+const countValidation = (obj) => {
+
+    let is = false
+    cartContainer = JSON.parse(localStorage.getItem('cartObj'))
+
+    console.table(cartContainer)
+
+    cartContainer.forEach((e)=>{
+        if(e.id === obj.id) {
+            e.count += 1
+            is = true
+        }
+    })
+
+    if( !is ){
+        cartContainer.push(obj)
+    }
+
+    localStorage.setItem('cartObj', JSON.stringify(cartContainer))
+
+}
 
 const catchRelatedProducts = () => {
 
@@ -116,7 +177,7 @@ const catchRelatedProducts = () => {
 
     relatedProducts.forEach((product) => {
         const { id, name, image } = product
-     
+
 
 
         relatedProductsToAppend += `
@@ -189,7 +250,7 @@ const comments = () => {
 
                         <div class="d-flex justify-content-between align-items-center">
 
-                            <div class="user d-flex flex-row align-items-center">                              
+                            <div class="d-flex flex-row align-items-center">                              
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -248,16 +309,19 @@ const actualDate = () => {
     return today
 }
 
+
+const callFetch = async () => {
+
+}
 document.addEventListener("DOMContentLoaded", e => {
 
-      //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
+    //Se construye la URL mediante el uso del local storage para acceder a los productos que corresponden a la categoria donde hicimos click
     getJSONData(PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("productID") + EXT_TYPE).then(resultComm => {
-
 
         if (resultComm.status === "ok") {
             productComments = resultComm.data;
 
-            userToBar()       
+            userToBar()
             comments()
 
             getJSONData(PRODUCT_INFO_URL + localStorage.getItem("productID") + EXT_TYPE).then(resultProd => {
@@ -274,7 +338,9 @@ document.addEventListener("DOMContentLoaded", e => {
                 }
             })
         }
-    })    
+
+
+    })
 })
 
 

@@ -29,18 +29,215 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <div class="dropdown" id="userDropdown">            
+          <div class="dropdown" id="userDropdown">
           </div>
         </ul>
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+  <main class="pb-5 container">
+
+    <form id="formulario" action="#" method="get" class="needs-validation" novalidate>
+
+      <div class="text-center p-4">
+        <h2>Carrito de compras</h2>
       </div>
+
+      <div class="container  container cart-header text-center rounded-3 shadow-sm">
+
+        <ul class="list-group list-group-horizontal fw-bold">
+          <li class="list-group-item list-group-item-cart">Artículo</li>
+          <li class="list-group-item list-group-item-cart">Cantidad</li>
+          <li class="list-group-item list-group-item-cart">Precio unitario</li>
+          <li class="list-group-item list-group-item-cart">Subtotal</li>
+          <span class="col-1"></span>
+        </ul>
+
+      </div>
+      <div class="container overflow-auto product-container-cart container text-center rounded-3 shadow-sm" id="cart">
+
+      </div>
+
+
+      <div class="row ms-auto me-auto d-flex justify-content-between">
+        <div class="delivery-adress-container card shadow-sm">
+          <h6 class="border-bottom pb-2 mb-0 p-3 ps-1 ">Dirección de envío</h6>
+          <div class="row d-flex justify-content-between mt-1">
+
+            <div class="col-sm-7 my-2">
+              <label for="apellido" class="form-label">Departamento</label>
+              <input type="text" class="form-control" id="apellido" required>
+              <div class="invalid-feedback">
+                Debes ingresar un departamento.
+              </div>
+            </div>
+            <div class="col-sm-5 my-2">
+              <label for="apellido" class="form-label">Barrio/localidad</label>
+              <input type="text" class="form-control" id="apellido" required>
+              <div class="invalid-feedback">
+                Debes ingresar un barrio/localidad.
+              </div>
+            </div>
+            <div class="col-sm-7 mb-3">
+              <label for="apellido" class="form-label">Calle</label>
+              <input type="text" class="form-control" id="apellido" required>
+              <div class="invalid-feedback">
+                Debes ingresar una calle.
+              </div>
+            </div>
+            <div class="col-sm-5 mb-3">
+              <label for="apellido" class="form-label">Número de puerta</label>
+              <input type="text" class="form-control" id="apellido" required>
+              <div class="invalid-feedback">
+                Debes ingresar un número de puerta.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 tipo-de-envio card shadow-sm p-3">
+          <h6 class="border-bottom pb-2 mb-0">Tipo de envío</h6>
+          <div class="d-block my-3 text-center">
+            <div class="custom-control custom-radio p-2">
+              <input id="goldradio" name="deliveryOpt" type="radio" class="custom-control-input cursor-active" value="Premium"
+                checked="" required="">
+              <label class="custom-control-label">Premium 2 a 5 días (15%)</label>
+            </div>
+            <div class="custom-control custom-radio p-2">
+              <input id="premiumradio" name="deliveryOpt" type="radio" class="custom-control-input cursor-active" value="Express"
+                required="">
+              <label class="custom-control-label">Express 5 a 8 días (7%)</label>
+            </div>
+            <div class="custom-control custom-radio p-2">
+              <input id="standardradio" name="deliveryOpt" type="radio" class="custom-control-input cursor-active" value="Standard"
+                required="">
+              <label class="custom-control-label">Standard 12 a 15 días (5%)</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      </div>
+      <div class="my-2 p-3 bg-body rounded shadow-sm card">
+        <h6 class="border-bottom pb-2 mb-0">Costos</h6>
+        <div class="d-flex pt-3">
+
+          <div class="pb-3 mb-0  lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong>Moneda</strong>
+              <a>
+                <span class="col-sm-4 my-2">
+                  Pesos<input class="col-sm-4 my-2 radio-casa-apto cursor-active" type="radio" value="UYU" name="tipoMoneda">
+                  Dólares<input class="col-sm-4 my-2 radio-casa-apto cursor-active" type="radio" value="USD" name="tipoMoneda"
+                    checked>
+                </span>
+              </a>
+            </div>
+            <span class="d-block">Moneda en la que deseas pagar</span>
+          </div>
+        </div>
+        <div class="d-flex pt-3">
+
+          <div class="pb-3 mb-0  lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong>Subtotal</strong>
+              <a id="subTotalCart">Follow</a>
+            </div>
+            <span class="d-block">Costo de tus productos</span>
+          </div>
+        </div>
+        <div class="d-flex pt-3">
+
+
+          <div class="pb-3 mb-0  lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong>Costo de envío</strong>
+              <a id="deliveryTax"></a>
+            </div>
+            <span class="d-block">Según el tipo de envío</span>
+          </div>
+        </div>
+        <div class="d-flex pt-3">
+
+
+          <div class="pb-3 mb-0  lh-sm border-0 w-100">
+            <div class="d-flex justify-content-between">
+              <strong>Total</strong>
+              <strong id="totalCart"></strong>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row ms-auto me-auto d-flex justify-content-between">
+        <div class="card shadow-sm">
+          <h6 class="border-bottom pb-2 mb-0 p-3 ps-1 ">Forma de pago</h6>
+          <div class="d-flex justify-content-between">
+            <div class="align-self-center">
+              <span id="paymentMethodLabel"></span>
+              <div class="invalid-feedback">
+                Debes seleccionar un método de pago.
+              </div>
+            </div>
+
+
+            <button type="button" class="btn btn-outline-primary my-2 w-auto rounded" data-bs-toggle="modal"
+              data-bs-target="#paymentModal" id="buttonPayment">
+              Seleccionar
+            </button>
+
+            <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+
+                      <h5 class="modal-title" id="paymentModalLabel">Forma de pago</h5>
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col">
+                        <div>
+                          <div class="row">
+                            <div class="col-6">
+                              <input type="radio" id="tarjeta" name="payment" value="tarjeta">
+                              <label for="tarjeta">Tarjeta de crédito</label>
+                            </div>
+                            <div class="col-6">
+                              <input type="radio" id="transferencia" name="payment" value="transferencia">
+                              <label for="tarjeta">Transferencia bancaria</label>
+                            </div>
+                          </div>
+                          <div class="row g-3" id="modalBody">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ms-auto me-auto d-flex justify-content-between mt-2">
+        <div class="card shadow-sm">
+          <button type="submit" class="btn btn-outline-success mx-3 my-2 w-25 rounded align-self-center" id="buy">
+            Realizar compra
+          </button>
+
+        </div>
+      </div>
+    </form>
+    <div class="alert visually-hidden shadow-sm rounded border" role="alert" id="alertSuccess">
+      <h2 class="alert-heading text-center">¡Has comprado con éxito!</h2>
+      <button type="button" class="btn btn-light float-end" data-bs-dismiss="alert" aria-label="Close">Cerrar</button>
     </div>
+
   </main>
   <footer class="text-muted">
     <div class="container">

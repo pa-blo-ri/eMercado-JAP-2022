@@ -42,7 +42,15 @@ const userToBar = () => {
   logOut()
 }
 
-const logOut = () => document.querySelector('#cerrarSesion').addEventListener('click', () => localStorage.removeItem('userName'))
+const logOut = () => document.querySelector('#cerrarSesion').onclick = () => {
+  localStorage.removeItem('userName')
+  localStorage.removeItem('userData')
+  localStorage.removeItem('productID')
+  localStorage.removeItem('catID')
+  localStorage.removeItem('cartObj')
+  localStorage.removeItem('userImg')
+
+}
 
 let getJSONData = function (url) {
   let result = {};
@@ -68,3 +76,5 @@ let getJSONData = function (url) {
       return result;
     });
 }
+
+
