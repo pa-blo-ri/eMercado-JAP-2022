@@ -38,3 +38,5 @@ function isEmptyStyle(tagId) {
     document.getElementById(tagId).style.borderColor = "red";
 
 }
+
+document.getElementById('forg-pass').onclick = () => signInWithPopup()
