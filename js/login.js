@@ -1,7 +1,7 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.13.0/firebase/auth";
+//import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.13.0/firebase/auth";
 
-const provider = new GoogleAuthProvider();
-const auth = getAuth();
+//const provider = new GoogleAuthProvider();
+//const auth = getAuth();
 
 document.getElementById("btn-li").addEventListener("click", function () {
 
@@ -42,7 +42,7 @@ function isEmptyStyle(tagId) {
     document.getElementById(tagId).style.borderColor = "red";
 
 }
-
+/*
 function callLoginGoogle(){
     signInWithPopup(auth, provider)
   .then((result) => {
@@ -65,3 +65,4 @@ function callLoginGoogle(){
 }
 
 document.getElementById('forg-pass').onclick = () => callLoginGoogle()
+*/
