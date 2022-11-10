@@ -1,3 +1,6 @@
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.13.0/firebase/auth";
+
+const provider = new GoogleAuthProvider();
 
 document.getElementById("btn-li").addEventListener("click", function () {
 
