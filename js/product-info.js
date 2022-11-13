@@ -100,10 +100,8 @@ function showProductsList() {
                 </div>
             </div>
     </div> 
-
     
         `
-
 
     document.getElementById("cat-list-container").innerHTML = htmlContentToAppend
     listeners()
@@ -131,8 +129,6 @@ const addToCart = () => {
         currency: productDataArray.currency,
         image: productDataArray.images[0]
     }
-
-
 
     if (localStorage.getItem('cartObj') === null) {
 
@@ -273,9 +269,9 @@ const comments = () => {
 
                                 <span class="rate">${commentsIndex.score}/5</span>
                             
-                             </div>   
+                            </div>   
                         
-                            </div>
+                        </div>
                                              
                     </div>                
 
@@ -332,14 +328,9 @@ document.addEventListener("DOMContentLoaded", e => {
                     catchRelatedProducts()
                     catchImages()
                     showProductsList()
-
-
-
                 }
             })
         }
-
-
     })
 })
 

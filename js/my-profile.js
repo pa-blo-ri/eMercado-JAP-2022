@@ -80,6 +80,7 @@ const buttonEvents = () => {
             e.preventDefault()
             e.stopPropagation()
         } else {
+            e.preventDefault()
             getById('alertSuccess').classList.remove('visually-hidden')
             dataToLocalStorage()
             userToBar()

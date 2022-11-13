@@ -7,7 +7,7 @@ let subtotalCartDolar = 0
 let dolarActualCompra = 0
 let defaultCurrency = 'USD'
 
-const cart = () => { //Setting and showing cart items
+const cart = () => { //Mostrando carrito con sus elementos
 
     let i = 0
 
@@ -41,7 +41,7 @@ const cart = () => { //Setting and showing cart items
     callFunc()
 }
 
-const callFunc = () => { //Calling other functions. Comes from cart function (above)
+const callFunc = () => { //Llamando a otras funciones luego de cargar el carrito
     postSubt()
     calculateSubt()
     removeItem()
@@ -51,7 +51,7 @@ const callFunc = () => { //Calling other functions. Comes from cart function (ab
     paymentMethodLabel()
 }
 
-const newCurrency = (currency, cost, newCurrency) => { //Gets the item currency and changing it to Pesos or Dolar according to user choices
+const newCurrency = (currency, cost, newCurrency) => { //Nos fijamos la moneda del item y la convertimos a pesos o a dolares dependiendo de la eleccion del usuario
 
     const actualCurrency = {
         "USD": (newCurrency) => (newCurrency === "UYU" ? cost * dolarActualCompra : cost),
@@ -61,14 +61,14 @@ const newCurrency = (currency, cost, newCurrency) => { //Gets the item currency 
     return Number(Number(actualCurrency[currency](newCurrency)).toFixed(2))
 }
 
-const postTotal = (currency = "USD") => { //Posting Total
+const postTotal = (currency = "USD") => { //Mostramos el total
 
     const sum = Number(document.getElementById('subTotalCart').innerHTML.slice(4)) + Number(document.getElementById('deliveryTax').innerHTML.slice(4))
 
     document.getElementById('totalCart').innerHTML = currency + " " + sum.toFixed(2)
 }
 
-const postSubt = (currency = "USD") => { //Posting Subtotal
+const postSubt = (currency = "USD") => { //MOstramos el subtotal
 
     let element = document.getElementsByClassName('_cart-subt')
     let toPost = 0
@@ -84,7 +84,7 @@ const postSubt = (currency = "USD") => { //Posting Subtotal
     deliveryTax()
 }
 
-const deliveryTax = (selected = "Premium") => {//Posting delivery tax 
+const deliveryTax = (selected = "Premium") => {//Mostrando el costo del envio
 
     let element = Number(document.getElementById('subTotalCart').innerHTML.slice(4))
     let toPost = 0
@@ -99,7 +99,7 @@ const deliveryTax = (selected = "Premium") => {//Posting delivery tax
     postTotal(defaultCurrency)
 }
 
-const removeItem = () => { //Removing an item
+const removeItem = () => { //Borrando un item del carrito
 
     let inp = document.querySelectorAll('svg[class="bi bi-trash"]')
 
@@ -123,7 +123,7 @@ const removeItem = () => { //Removing an item
     })
 }
 
-const getSelectedCurrency = () => { //Getting the currency choice selected by user
+const getSelectedCurrency = () => { //Nos fijamos la eleccion de moneda del usuario
 
     const radioButtons = document.querySelectorAll('input[name="tipoMoneda"]');
 
@@ -144,7 +144,7 @@ const getSelectedCurrency = () => { //Getting the currency choice selected by us
 }
 
 
-const paymentMethodLabel = (selected = "ninguno") => { //Showing the payment method selected by the user
+const paymentMethodLabel = (selected = "ninguno") => { //Mostramos el metodo de pago elegido por el usuario
     const selectedPayment = {
         "ninguno": "Seleccionado: Ninguno",
         "tarjeta": "Seleccionado: Tarjeta de crédito",
@@ -154,7 +154,7 @@ const paymentMethodLabel = (selected = "ninguno") => { //Showing the payment met
     return document.getElementById('paymentMethodLabel').innerHTML = selectedPayment[selected]
 }
 
-const paymentMethod = () => { //Getting the payment method selected by the user
+const paymentMethod = () => { //Nos fijamos el metodo de pago elegido por el usario
 
     const radioButtons = document.querySelectorAll('input[name="payment"]')
 
@@ -174,7 +174,7 @@ const paymentMethod = () => { //Getting the payment method selected by the user
     })
 }
 
-const buildModalBody = (selected) => { //Building modal body according to user choices
+const buildModalBody = (selected) => { //Construimos el modal en base a la elecciond del usuario
 
     let toPost = ''
 
@@ -221,7 +221,7 @@ const buildModalBody = (selected) => { //Building modal body according to user c
 
 }
 
-const getSelectedDelivery = () => { //Getting the delivery choice selected by the user
+const getSelectedDelivery = () => { //Nos fijamos la opcion de delivery seleccionada por el usuario
 
     const radioButtons = document.querySelectorAll('input[name="deliveryOpt"]')
 
@@ -240,7 +240,7 @@ const getSelectedDelivery = () => { //Getting the delivery choice selected by th
     })
 }
 
-const calculateSubt = () => { //Calculating subtotal
+const calculateSubt = () => { //Calculamos el subtotal
     let inp = document.querySelectorAll('input.cart-count-input')
 
 
@@ -261,7 +261,7 @@ const calculateSubt = () => { //Calculating subtotal
     })
 }
 
-async function getResponse() { //Getting actual currency prices
+async function getResponse() { //Traemos la cotizacion actual de la moneda consumiendo una API
     const response = await fetch(
         'https://cotizaciones-brou.herokuapp.com/api/currency/latest',
         {
@@ -279,7 +279,7 @@ async function getResponse() { //Getting actual currency prices
     cart()
 }
 
-const settingCartContent = () => { //Setting cart and localStorage content 
+const settingCartContent = () => { //Armamos el contenido del carrito y del localStorage 
 
     if (localStorage.getItem('cartObj') !== null) {
         cartContainer = JSON.parse(localStorage.getItem('cartObj'))
@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
         getResponse()
     })
 
-    document.getElementById('formulario').addEventListener('submit', function (evento) { //Checking form validity
+    document.getElementById('formulario').addEventListener('submit', function (evento) { //Nos fijamos si el formulario es válido
 
         let inputs = document.querySelectorAll('input.cart-count-input')
         let payment = document.getElementById('paymentMethodLabel')

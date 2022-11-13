@@ -1,39 +1,12 @@
-document.getElementById("btn-li").addEventListener("click", function () {
+document.getElementById('formulario').onsubmit = (e) => {
 
-
-    if (isEmpty("floatingInput") || isEmpty("floatingPassword")) {
-
-
-
-        if (isEmpty("floatingInput")) {
-            isEmptyStyle("floatingInput");
-
-        } else document.getElementById("floatingInput").style.borderColor = "";
-
-        if (isEmpty("floatingPassword")) {
-            isEmptyStyle("floatingPassword");
-
-        } else document.getElementById("floatingPassword").style.borderColor = "";
-
-
-        alert("Ninguno de los campos puede estar vacío.");
-
-
+    if (!document.getElementById('formulario').checkValidity()) {
+        e.preventDefault()
+        e.stopPropagation()
     } else {
-        localStorage.setItem("userName", document.getElementById("floatingInput").value);
-        window.location.href = "portada.html";
-
+        e.preventDefault()        
+        localStorage.setItem("userName", document.getElementById("floatingInput").value)
+        window.location.href = "portada.html"
     }
-});
-
-function isEmpty(tagId) {
-    let inputLenght = (Object.keys(document.getElementById(tagId).value).length);
-    return inputLenght <= 0;
-}
-
-
-
-function isEmptyStyle(tagId) {
-    document.getElementById(tagId).style.borderColor = "red";
-
+    document.getElementById('formulario').classList.add('was-validated')
 }

@@ -491,7 +491,7 @@ li>.cart-count-input {
   padding-right: .75rem;
   background: none;
 }
-/*neww*/
+
 .user {
   display: inline-block;
   width: 150px;
@@ -504,17 +504,16 @@ li>.cart-count-input {
   object-fit: cover;
 }
 
-
 #display-image {
   background-image: url(../img/user.png)
 }
-
 
 .parent {
   position: relative;
   top: 0;
   left: 0;
 }
+
 .image1 {
   position: absolute;
   top: -75px;
@@ -543,6 +542,7 @@ li>.cart-count-input {
   -o-animation: fadeIn ease 0.3s;
   -ms-animation: fadeIn ease 0.3s;
 }
+
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
