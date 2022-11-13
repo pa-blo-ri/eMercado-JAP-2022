@@ -101,7 +101,7 @@ const deliveryTax = (selected = "Premium") => {//Mostrando el costo del envio
 
 const removeItem = () => { //Borrando un item del carrito
 
-    let inp = document.querySelectorAll('svg[class="bi bi-trash"]')
+    let inp = document.querySelectorAll('svg.bi-trash')
 
     inp.forEach((e) => {
         e.addEventListener('click', function () {
