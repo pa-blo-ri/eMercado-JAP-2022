@@ -337,9 +337,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!this.checkValidity() || invalid) {
             evento.preventDefault()
             evento.stopPropagation()
-            console.log("not submited")
         } else {
-            console.log("submited")
+            evento.preventDefault()
             document.getElementById('alertSuccess').classList.remove('visually-hidden')
             document.getElementById('alertSuccess').classList.add('alert-light')
         }
