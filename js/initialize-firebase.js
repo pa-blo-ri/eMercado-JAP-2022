@@ -33,7 +33,8 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebas
       return cityList;
     }
 
-  //  export const loginWithGoogle = () => {
+    /*
+   const loginWithGoogle = () => {
 
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
@@ -61,4 +62,5 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebas
             
           });
       
-  //    }
+      }
+      */
