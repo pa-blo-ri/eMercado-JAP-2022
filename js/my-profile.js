@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {    
+document.addEventListener("DOMContentLoaded", function () {
     checkLogIn()
 })
 
@@ -7,14 +7,14 @@ const getById = id => document.getElementById(id)
 const logIn = () => getById('logIn').onclick = () => window.location = "index.html"
 
 const checkLogIn = () => {
-    
+
     if (localStorage.getItem('userName') === null) {
         getById('alert').classList.remove("visually-hidden")
         getById('mainCard').classList.add("visually-hidden")
         logIn()
-    
+
     } else {
-   
+
         userToBar()
         buttonEvents()
         getById('mainCard').classList.remove("visually-hidden")
@@ -48,9 +48,9 @@ const dataToLocalStorage = () => {
 
 const settingDefaultValues = () => {
 
-    if(localStorage.getItem('userImg') !== null){
+    if (localStorage.getItem('userImg') !== null) {
         document.querySelector("#display-image").style.backgroundImage = `url(${localStorage.getItem("userImg")})`
-        }
+    }
 
     if (localStorage.getItem('userData') !== null) {
 
@@ -90,22 +90,24 @@ const buttonEvents = () => {
 }
 
 
-const imageInput = document.querySelector("#file-input"); imageInput.addEventListener("change", function () {
-    
+const imageInput = document.querySelector("#file-input")
+
+imageInput.addEventListener("change", function () {
+
     const reader = new FileReader()
-    
+
     reader.addEventListener("load", () => {
-        
-        const uploadedImage = reader.result        
-        
-        document.querySelector("#display-image").style.backgroundImage = `url(${uploadedImage})`        
+
+        const uploadedImage = reader.result
+
+        document.querySelector("#display-image").style.backgroundImage = `url(${uploadedImage})`
         document.querySelector('#display-image').classList.add("fade-in")
 
         localStorage.setItem('userImg', uploadedImage)
-        
+
         setTimeout(() => {
             document.querySelector('#display-image').classList.remove("fade-in")
-          }, "1000")          
+        }, "1000")
 
     })
     reader.readAsDataURL(this.files[0])

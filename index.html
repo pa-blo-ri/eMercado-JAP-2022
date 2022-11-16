@@ -27,14 +27,16 @@
         <form id="formulario" action="#" method="get" class="needs-validation" novalidate>
           <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
           <div class="form-floating">
-            <input type="email" class="form-control mb-2 radius" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" class="form-control mb-2 radius" id="floatingInput" placeholder="name@example.com"
+              required>
             <label for="floatingInput">Dirección de correo electónico</label>
             <div class="invalid-feedback">
               Debes ingresar un correo electrónico válido.
             </div>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control margin-bottom-10 mt-3 radius" id="floatingPassword" placeholder="Password" required>
+            <input type="password" class="form-control margin-bottom-10 mt-3 radius" id="floatingPassword"
+              placeholder="Password" required>
             <label for="floatingPassword">Contraseña</label>
             <div class="invalid-feedback">
               Debes ingresar tu contraseña.
@@ -43,7 +45,7 @@
           </div>
           <div class="checkbox mb-3 margin-bottom-20">
             <label class="margin-bottom-20">
-              <a href="#" id="forg-pass">Olvidé mi contraseña</a>
+              <a href="#" id="forg-pass" onclick="loginWithGoogle()">Olvidé mi contraseña</a>
             </label>
           </div>
           <button class="w-100 btn btn-lg btn-primary radius" id="btn-li" type="submit">Ingresar</button>
@@ -62,8 +64,10 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-  <!--<script type="module" src="js/firebase-app.js"></script>-->
-  <script src="js/login.js"></script>
-</body>
 
+  <script src="js/login.js"></script>
+  <script type="module" src="js/initialize-firebase.js"></script>
+  <script type="module" src="js/login-google.js"></script>
+
+</body>
 </html>
