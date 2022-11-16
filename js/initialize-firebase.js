@@ -1,6 +1,6 @@
-import { initializeApp } from 'firebase/app';
-    import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-    import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js';
+    import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js';
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
     // Follow this pattern to import other Firebase services
     // import { } from 'firebase/<service>';
 
