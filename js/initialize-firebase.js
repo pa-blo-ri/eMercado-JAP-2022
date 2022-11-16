@@ -63,9 +63,9 @@ export const loginWithGoogle = () => {
         
         })
 
-    //    return window.loginWithGoogle = loginWithGoogle
-    window.loginWithGoogle = loginWithGoogle
-    
+        return window.loginWithGoogle = loginWithGoogle
+    //window.loginWithGoogle = loginWithGoogle
+
     }
 
  
