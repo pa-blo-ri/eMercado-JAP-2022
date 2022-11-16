@@ -33,13 +33,12 @@ async function getCities(db) {
     return cityList;
 }
 
-
-//const loginWithGoogle = () => {
+document.getElementById('forg-pass').addEventListener('click', () => {
 
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
- /*   const loginWithGoogle = () => {
+
     
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -63,7 +62,9 @@ async function getCities(db) {
         console.log(errorMessage)
         
         });
+
+})
+
     
-    }*/
     
-export { provider, auth }
+    
