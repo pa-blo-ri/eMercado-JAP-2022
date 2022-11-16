@@ -33,12 +33,12 @@ async function getCities(db) {
     return cityList;
 }
 
-document.getElementById('forg-pass').addEventListener('click', () => {
+//document.getElementById('forg-pass').addEventListener('click', () => {
 
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
-
+const loginWithGoogle = () => {
     
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -61,9 +61,13 @@ document.getElementById('forg-pass').addEventListener('click', () => {
     
         console.log(errorMessage)
         
-        });
+        })
 
-})
+        return window.loginWithGoogle = loginWithGoogle
+
+    }
+
+    window.loginWithGoogle = loginWithGoogle
 
     
     
