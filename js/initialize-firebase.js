@@ -33,7 +33,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebas
       return cityList;
     }
 
-    const loginWithGoogle = function () {
+    export const loginWithGoogle = function () {
 
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
