@@ -38,7 +38,7 @@ async function getCities(db) {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
-const loginWithGoogle = () => {
+export const loginWithGoogle = () => {
     
     signInWithPopup(auth, provider)
         .then((result) => {
