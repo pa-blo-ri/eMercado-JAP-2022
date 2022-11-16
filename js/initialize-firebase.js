@@ -44,7 +44,9 @@ export const loginWithGoogle = () => {
         // The signed-in user info.
         const user = result.user;
         // ...
-        console.log(user)
+        localStorage.setItem("userName", user.email)
+        window.location.href = "portada.html"
+
         }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -54,9 +56,7 @@ export const loginWithGoogle = () => {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
-    
-        console.log(errorMessage)
-        
+       
         })
     }
 

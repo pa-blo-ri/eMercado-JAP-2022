@@ -231,6 +231,7 @@ a.custom-card:hover {
   border: 0.5px solid lightgray;
   height: 400px;
 }
+
 .product-container-cart {
   margin-top: 0%;
   background: white;
@@ -464,20 +465,24 @@ li>.cart-count-input {
   width: 74.3%;
   margin-top: 0.5rem
 }
-.tipo-de-envio{
+
+.tipo-de-envio {
   margin-top: 0.5rem
 }
-.radio-casa-apto{
+
+.radio-casa-apto {
   width: 20px;
   padding-left: 5px;
-  margin-top: 10px!important;
+  margin-top: 10px !important;
   margin-left: 0%;
   align-self: flex-end;
 }
-.cart-header{
+
+.cart-header {
   margin-top: 10px;
   border: 0.5px solid lightgray;
 }
+
 .modal-hr {
   margin-top: 2rem;
   margin-bottom: 0rem;
@@ -486,6 +491,7 @@ li>.cart-count-input {
   border: 0;
   opacity: 0.25;
 }
+
 .form-control.no-validate:valid {
   border-color: #ced4da;
   padding-right: .75rem;
@@ -521,6 +527,7 @@ li>.cart-count-input {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
 
 }
+
 .image2 {
   position: absolute;
   top: 45px;
@@ -544,26 +551,107 @@ li>.cart-count-input {
 }
 
 @keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @-moz-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @-o-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @-ms-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.google-image {
+  width: 32px;
+}
+
+.ribbon {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ribbon:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.ribbon {
+  width: 600px;
+  border-top: solid;
+  border-bottom: solid;
+  margin: 2em auto;
+  text-align: center;
+  font-size: 2em;
+  line-height: 2.2em;
+}
+
+.ribbon:after {
+  top: -3px;
+  bottom: -3px;
+  border-radius: 3em;
+  border: solid;
+  width: 2.2em;
+  z-index: -1;
+  box-shadow: 0 0 0 300px #5489fd
+}
+
+.ribbon:before {
+  left: -1.55em;
+}
+
+.ribbon:after {
+  right: -1.55em;
+}
+
+/* playground */
+.ribbon {
+  border-radius: 0.15em;
+}
+
+.google-login{
+  margin-left: -215px;
+  position: absolute;
+  margin-top: -2px;
 }
