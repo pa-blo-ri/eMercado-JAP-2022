@@ -67,7 +67,11 @@
 
   <script src="js/login.js"></script>
   <script type="module" src="js/initialize-firebase.js"></script>
-  <!--<script type="module" src="js/login-google.js"></script>-->
+  <script type="module">
+    import { loginWithGoogle } from './initialize-firebase'
+    window.loginWithGoogle = loginWithGoogle
+  </script>
 
 </body>
+
 </html>

@@ -1,7 +1,3 @@
-import { loginWithGoogle } from './initialize-firebase'
-
-window.loginWithGoogle = loginWithGoogle
-
 document.getElementById('formulario').onsubmit = (e) => {
 
     if (!document.getElementById('formulario').checkValidity()) {
