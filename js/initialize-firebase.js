@@ -34,10 +34,12 @@ async function getCities(db) {
 }
 
 
-const loginWithGoogle = () => {
+//const loginWithGoogle = () => {
 
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
+
+ /*   const loginWithGoogle = () => {
     
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -62,6 +64,6 @@ const loginWithGoogle = () => {
         
         });
     
-    }
+    }*/
     
-export { loginWithGoogle }
+export { provider, auth }
